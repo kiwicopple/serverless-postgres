@@ -1,0 +1,13 @@
+version: "3.7"
+services:
+  orioledb:
+    build: ./oriole
+    env_file:
+      - .env
+    volumes:
+      - orioledb_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+volumes:
+  orioledb_data:

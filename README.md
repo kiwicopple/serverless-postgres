@@ -72,7 +72,8 @@ I wouldn't recommend using this in production just yet. The goal of this repo is
 
 - [ ] **Deploy to Fly**. I still need to document the secure deployment steps for Fly.io (PRs welcome).
 - [ ] **Distributed read replicas**. Oriole can have many read-replicas reading from the same S3 bucket. This is a good pairing with Fly.io that makes it simple to launch servers around the world. Not that if you do this it's _very important_ that the read replicas do not write to the same bucket as your primary or the data will become corrupted.
-- [ ] **Distributed data, without Postgres replication**. Tigris will globally replicate objects that are less that 128 bytes. We would need to support global replication of all objects in this bucket if we want to create fast read replicas without Postgres replication.
+- [x] **Distributed data, without Postgres replication**. ~~Tigris will globally replicate objects that are less that 128 bytes. We would need to support global replication of all objects in this bucket if we want to create fast read replicas without Postgres replication.~~
+  - Tigris will replicate any object that requires fast access regardless of the size. It is possible to [control this per object](https://www.tigrisdata.com/docs/objects/object_regions/).
 - [ ] **Non-forked Postgres**. Oriole currently requires some [patches](https://www.orioledb.com/docs#patch-set) to the Postgres TAM API. The goal is to make them available in Postgres core.
 
 ## Oriole Decoupled Storage

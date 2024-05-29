@@ -1,4 +1,4 @@
-# Oriole Serverless Postgres (experimental)
+# Serverless Postgres (experimental)
 
 Serverless Postgres using Oriole, Fly Machines, and Tigris for S3 Storage.
 
@@ -62,7 +62,6 @@ After this, you the Oriole background workers will store the data in Tigris. You
 
 ![Serverless Postgres](./docs/tigris-data.png)
 
-
 ## Deploy to Fly
 
 TBD
@@ -74,3 +73,15 @@ I wouldn't recommend using this in production just yet. The goal of this repo is
 - [ ] **Deploy to Fly**. I still need to document the secure deployment steps for Fly.io (PRs welcome).
 - [ ] **Distributed read replicas**. Oriole can have many read-replicas reading from the same S3 bucket. This is a good pairing with Fly.io that makes it 
 - [ ] **Non-forked Postgres**. Oriole currently requires some [patches](https://www.orioledb.com/docs#patch-set) to the Postgres TAM API. The goal is to make them available in Postgres core.
+
+## Oriole Decoupled Storage
+
+Oriole has [experimental support](https://www.orioledb.com/docs/usage/decoupled-storage) for S3. 
+
+Oriole is a table storage extension for Postgres. It is designed to be a drop-in replacement for Postgres' existing storage engine. The Oriole storage engine's reduction in disk IO is significant enough that it unlocks performant databases backed by S3 compatible blob storage.
+
+Data most-often accessed is cached in local storage for performance. The data is synced with S3 asynchronously:
+
+![S3 Workers](./docs/oriole-logs.png)
+
+Read more in the [Oriole docs](https://www.orioledb.com/docs/usage/decoupled-storage).

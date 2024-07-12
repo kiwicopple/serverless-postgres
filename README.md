@@ -89,7 +89,7 @@ fly secrets set $(cat .env | xargs)
 Deploy your app to Fly:
 
 ```bash
-fly deploy
+fly deploy --ha=false
 ```
 
 This command will use the `fly.toml` file in the project directory to configure and deploy the app.
@@ -99,10 +99,16 @@ This command will use the `fly.toml` file in the project directory to configure 
 To make it easier to connect to your Postgres instance, allocate a shared IPv4 address:
 
 ```bash
-fly ips allocate-v4 --shared
+fly ips allocate-v6
 ```
 
-This command allocates a shared IPv4 address that you can use to connect to your Postgres instance.
+This command allocates an IPv4 address that you can use to connect to your Postgres instance.
+Note: If you require an IPv4 address and your client doesn't support IPv6, you can allocate a dedicated IPv4 address. However, be aware that this will incur a cost of $2 per month:
+
+```bash
+fly ips allocate-v4
+```
+
 
 ## Roadmap
 

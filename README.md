@@ -94,9 +94,9 @@ fly deploy --ha=false
 
 This command will use the `fly.toml` file in the project directory to configure and deploy the app.
 
-### Step 4: Allocate a shared IPv4 address
+### Step 4: Allocate an IP address
 
-To make it easier to connect to your Postgres instance, allocate a shared IPv4 address:
+To make it easier to connect to your Postgres instance, allocate an IP address:
 
 ```bash
 fly ips allocate-v6

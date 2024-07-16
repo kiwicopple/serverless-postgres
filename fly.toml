@@ -12,16 +12,21 @@ auto_start_machines = true
 min_machines_running = 0
 max_machines_running = 1
 
-[[services.ports]]
-    port = 5432
-    protocol = "tcp"
-[[services.tcp_checks]]
+  [[services.ports]]
+  port = 5432
+  protocol = "tcp"
+
+  [[services.tcp_checks]]
   grace_period = '10s'
   interval = '15s'
   timeout = '2s'
 
 
 [[vm]]
-  memory = '2gb'
-  cpu_kind = 'shared'
-  cpus = 1
+memory = '2gb'
+cpu_kind = 'shared'
+cpus = 1
+
+[[mounts]]
+source = "pg_data"
+destination = "/var/lib/postgresql"

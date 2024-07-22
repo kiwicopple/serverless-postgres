@@ -2,24 +2,27 @@ app = 'your-serverless-postgres'
 primary_region = 'iad'
 
 [build]
-dockerfile = "oriole/Dockerfile"
+  dockerfile = 'oriole/Dockerfile'
 
-[services]
-internal_port = 5432
-protocol = "tcp"
-auto_stop_machines = true
-auto_start_machines = true
-min_machines_running = 0
-max_machines_running = 1
-
-[[services.ports]]
+[[services]]
+  protocol = 'tcp'
+  internal_port = 5432
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+  max_machines_running = 1
+  [[services.ports]]
+    handlers = ['pg_tls']
     port = 5432
-    protocol = "tcp"
-[[services.tcp_checks]]
-  grace_period = '10s'
-  interval = '15s'
-  timeout = '2s'
+  [[services.tcp_checks]]
+    grace_period = '10s'
+    interval = '15s'
+    timeout = '2s'
 
+[mounts]
+source = 'data'
+destination = '/var/lib/postgresql/'
+initial_size = '1gb'
 
 [[vm]]
   memory = '2gb'

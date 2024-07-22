@@ -92,23 +92,9 @@ Deploy your app to Fly:
 fly deploy --ha=false
 ```
 
-This command will use the `fly.toml` file in the project directory to configure and deploy the app.
+This command will use the `fly.toml` file in the project directory to configure and deploy the app. It is going to create a single machine and an attached volume.
 
-### Step 4: Allocate an IP address
-
-To make it easier to connect to your Postgres instance, allocate an IP address:
-
-```bash
-fly ips allocate-v6
-```
-
-This command allocates an IPv6 address that you can use to connect to your Postgres instance.
-Note: If you require an IPv4 address and your client doesn't support IPv6, you can allocate a dedicated IPv4 address. However, be aware that this will incur a cost of $2 per month:
-
-```bash
-fly ips allocate-v4
-```
-
+You can now connect to the postgres instance with the host name: <app-name>.fly.dev
 
 ## Roadmap
 

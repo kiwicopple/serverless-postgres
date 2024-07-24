@@ -85,7 +85,7 @@ First, create secrets for your Tigris credentials:
 fly secrets set $(cat .env | xargs)
 ```
 
-### Step 3: Deploy to Fly
+### Step 3: Deploy Primary to Fly
 
 Deploy your app to Fly:
 
@@ -95,13 +95,18 @@ fly deploy --ha=false
 
 This command will use the `fly.toml` file in the project directory to configure and deploy the app. It is going to create a single machine and an attached volume.
 
-You can now connect to the postgres instance with the host name: <app-name>.fly.dev
+You can now connect to the postgres instance with the host name: `<app-name>.fly.dev`
+
+### Step 4: Deploy Read Replica
+
+- [ ] TODO: Deploy a read replica that reads from the same Tigris bucket. To do this we also need to add the [Oriole Data Loader](https://www.orioledb.com/docs/usage/decoupled-storage#s3-loader-utility) and make sure that it is running in read-only mode
 
 ## Roadmap
 
 I wouldn't recommend using this in production just yet. The goal of this repo is to showcase Oriole and start gathering feedback from anyone who wants to test it out. Please submit any Oriole bug reports to the [Oriole GitHub repo](https://github.com/orioledb/orioledb).
 
-- [x] **Deploy to Fly**. Documentation for secure deployment steps for Fly.io has been added.
+- [x] **Deploy Primary to Fly**. Documentation for secure deployment steps for Fly.io has been added.
+- [ ] **Deploy Read Replica to Fly**. TODO: document steps
 - [ ] **Distributed read replicas**. Oriole can have many read-replicas reading from the same S3 bucket. This is a good pairing with Fly.io that makes it simple to launch servers around the world. Not that if you do this it's _very important_ that the read replicas do not write to the same bucket as your primary or the data will become corrupted.
 - [x] **Distributed data, without Postgres replication**. Tigris replicates any object that requires fast access regardless of the size. It is possible to [control this per object](https://www.tigrisdata.com/docs/objects/object_regions/).
   - Needs to be tested but this implementation but it should work "in theory".

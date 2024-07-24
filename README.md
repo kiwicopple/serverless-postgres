@@ -12,6 +12,7 @@ This is a MVP for Serverless Postgres.
 
 3/ It uses [Tigris](https://www.tigrisdata.com/), Globally Distributed S3-Compatible Object Storage. Oriole will automatically backup the data to Tigris using background workers.
 
+<img width="787" alt="image" src="https://github.com/user-attachments/assets/7ad8f37f-424c-4c78-a2ff-941a52631d61">
 
 ## Usage
 
